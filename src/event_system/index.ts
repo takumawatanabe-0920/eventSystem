@@ -18,7 +18,9 @@ class EventSystem {
       if (event) {
         const subscriptions = eventMap[event.eventType]
         for (const subscription of subscriptions) {
-          subscription.callback(event.args as any)
+          subscription.callback(event.args as any).catch((err) => {
+            console.error(err)
+          })
         }
       }
     }
